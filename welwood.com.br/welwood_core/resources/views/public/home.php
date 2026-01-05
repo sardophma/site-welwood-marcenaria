@@ -1,4 +1,4 @@
-<?php $app = config_arr('app'); $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '55SEUNUMERO'); ?>
+<?php $app = config_arr('app'); $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '5521968661598'); ?>
 
 <!-- HERO -->
 <section class="relative overflow-hidden bg-white">
@@ -119,3 +119,4 @@ foreach($servicos as $s):
     </div>
   </div>
 </section>
+
