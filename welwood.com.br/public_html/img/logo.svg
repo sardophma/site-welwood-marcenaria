@@ -1,0 +1,8 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect width="500" height="500" fill="#556B2F"/>
+  <path d="M120 260 L250 160 L380 260" stroke="white" stroke-width="10" fill="none"/>
+  <path d="M180 220 L180 260" stroke="white" stroke-width="10"/>
+  <text x="250" y="330" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" fill="white">W.E.L Wood</text>
+  <text x="250" y="370" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="white">MARCENARIA</text>
+</svg>
