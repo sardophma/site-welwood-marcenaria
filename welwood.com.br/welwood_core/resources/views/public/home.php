@@ -105,8 +105,16 @@ foreach($servicos as $s):
     <div data-aos="fade-right">
       <h2 class="text-2xl md:text-3xl font-semibold">Regiões atendidas</h2>
       <p class="mt-3 text-olive-700">Rio de Janeiro, Niteroi, Ilha do Governador.</p>
-      <ul class="mt-4 grid grid-cols-2 gap-2 text-sm">
-        <li>Copacabana</li><li>Botafogo</li><li>Laranjeiras</li><li>Barra</li><li>Recreio</li><li>Jardim Guanabara</li><li>Centro RJ e Niteroi</li><li>Icaraí</li><li>São Francisco</li><li>Ingá</li><li>Camboinhas</li><li>muitas mais Regiões</li>
+      <ul class="mt-4 grid grid-cols-2 gap-2 text-sm text-olive-800">
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Copacabana</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Botafogo</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Barra da Tijuca</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Recreio</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Jardim Guanabara</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Icaraí (Niterói)</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> São Francisco</li>
+        <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Centro (RJ/Niterói)</li>
+        <li class="font-medium text-olive-600">e demais localidades sob consulta</li>
       </ul>
     </div>
     <div data-aos="fade-left" class="bg-olive-50 rounded-2xl p-6 border border-olive-100">
@@ -119,4 +127,5 @@ foreach($servicos as $s):
     </div>
   </div>
 </section>
+
 
