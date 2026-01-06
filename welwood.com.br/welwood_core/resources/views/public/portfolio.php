@@ -11,6 +11,9 @@ $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '5521968661598');
 //                Se tiver mais de uma, separe por vírgula: ['foto1.jpg', 'foto2.jpg']
 // ==============================================================================
 
+// ==============================================================================
+// ÁREA DE GERENCIAMENTO DE PROJETOS
+// ==============================================================================
 $projetos = [
     [
         'titulo' => 'Cozinha Premium Freijó & Branco',
@@ -19,7 +22,7 @@ $projetos = [
         'tags'   => ['MDF Ultra', 'Amortecedores', 'Cozinha'],
         'fotos'  => [
             'cozinha-freijo-1.jpg',
-            'cozinha-freijo-2.jpg', // O sistema ignorará se o arquivo não existir, mas tente manter organizado
+            'cozinha-freijo-2.jpg', 
         ]
     ],
     [
@@ -30,6 +33,16 @@ $projetos = [
         'fotos'  => [
             'cozinha-azul-1.jpg',
             'cozinha-azul-2.jpg',
+        ]
+    ],
+    [
+        'titulo' => 'Escritório Clean em MDF Branco',
+        'local'  => 'Itaipu - Niterói',
+        'desc'   => 'Bancada ergonômica para computadores com gaveteiros e nicho aéreo. Estrutura 100% em MDF Branco, garantindo um ambiente de trabalho organizado e claro.',
+        'tags'   => ['Home Office', 'MDF Branco', 'Niterói'],
+        'fotos'  => [
+            'escritorio-itaipu-1.jpg',
+            'escritorio-itaipu-2.jpg',
         ]
     ],
     [
@@ -132,11 +145,6 @@ $projetos = [
 </section>
 
 <style>
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
