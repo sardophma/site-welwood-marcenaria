@@ -33,6 +33,7 @@ $projetos = [
         'fotos'  => [
             'cozinha-azul-1.jpg',
             'cozinha-azul-2.jpg',
+            'cozinha-azul-3.jpg',
         ]
     ],
     [
