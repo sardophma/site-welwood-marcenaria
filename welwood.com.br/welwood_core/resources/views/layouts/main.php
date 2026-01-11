@@ -15,12 +15,10 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
   <title><?= esc($title ?? 'WelWood') ?></title>
   <meta name="description" content="<?= esc($description ?? '') ?>" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN (podemos trocar depois pelo CSS compilado em /assets/welwood.css) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -49,12 +47,9 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
     }
   </script>
 
-  <!-- CSS final opcional -->
   <link rel="stylesheet" href="/assets/welwood.css?v=1">
 
-  <!-- Ícones -->
   <script src="https://unpkg.com/lucide@latest"></script>
-<!-- Favicon & App Icons -->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
@@ -62,12 +57,10 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#7b8651">
 
-  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 <body class="bg-olive-50 text-olive-900 selection:bg-gold-200 selection:text-olive-900">
-  <!-- Header / Navbar -->
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-olive-100">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between h-16">
@@ -76,7 +69,6 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
           <span class="font-semibold tracking-wide"><?= esc($site_name) ?></span>
         </a>
 
-        <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-6">
           <?php
             $links = [
@@ -102,14 +94,12 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
           </a>
         </nav>
 
-        <!-- Mobile toggle -->
         <button id="menuBtn" aria-expanded="false" aria-controls="mobileMenu"
                 class="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-olive-100">
           <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
     </div>
-    <!-- Mobile overlay -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-olive-100">
       <div class="px-4 py-4 flex flex-col gap-2">
         <?php foreach ($links as $href => $label): ?>
@@ -123,12 +113,10 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
     </div>
   </header>
 
-  <!-- Conteúdo -->
   <main>
     <?php include $viewFile; ?>
   </main>
 
-  <!-- Footer -->
   <footer class="mt-16 border-t border-olive-100">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 grid md:grid-cols-3 gap-6">
       <div>
