@@ -1,6 +1,5 @@
 <?php $app = config_arr('app'); $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '5521968661598'); ?>
 
-<!-- HERO -->
 <section class="relative overflow-hidden bg-white">
   <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
     <div data-aos="fade-right">
@@ -13,7 +12,7 @@
       <p class="mt-4 text-olive-700">Atendemos Rio de Janeiro, Niterói e São Gonçalo com projetos personalizados, materiais de alto padrão e acabamento impecável.</p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a href="/portfolio" class="rounded-2xl px-5 py-3 bg-olive-800 text-white hover:bg-olive-700 shadow-soft">Ver portfólio</a>
-        <a href="/servicos#lista" class="rounded-2xl px-5 py-3 border border-olive-300 hover:border-olive-400">Ver serviços</a>
+        <a href="/servicos" class="rounded-2xl px-5 py-3 border border-olive-300 hover:border-olive-400">Ver serviços</a>
         <a href="https://wa.me/<?= esc($wa) ?>?text=<?= urlencode('Olá! Gostaria de um orçamento para móveis sob medida.') ?>" target="_blank" class="rounded-2xl px-5 py-3 bg-gold-500 text-white hover:bg-gold-400">Pedir orçamento</a>
       </div>
     </div>
@@ -23,7 +22,6 @@
   </div>
 </section>
 
-<!-- DIFERENCIAIS -->
 <section class="bg-olive-50">
   <div class="max-w-7xl mx-auto px-4 md:px-6 py-14">
     <h2 class="text-2xl md:text-3xl font-semibold text-center">Por que escolher a WelWood</h2>
@@ -47,7 +45,6 @@ foreach($items as $i):
   </div>
 </section>
 
-<!-- SERVIÇOS EM DESTAQUE -->
 <section class="bg-white">
   <div class="max-w-7xl mx-auto px-4 md:px-6 py-14">
     <div class="flex items-end justify-between">
@@ -69,7 +66,7 @@ foreach($servicos as $s):
         <h3 class="mt-3 font-semibold"><?= esc($s['title']) ?></h3>
         <p class="mt-1 text-sm text-olive-700"><?= esc($s['desc']) ?></p>
         <div class="mt-4 flex gap-3">
-          <a href="/servicos#lista" class="text-sm rounded-xl px-3 py-2 border border-olive-300 hover:border-olive-400">Ver detalhes</a>
+          <a href="/servicos" class="text-sm rounded-xl px-3 py-2 border border-olive-300 hover:border-olive-400">Ver detalhes</a>
           <a href="https://wa.me/<?= esc($wa) ?>?text=<?= urlencode('Olá! Tenho interesse em ' . $s['title'] . '.') ?>" target="_blank" class="text-sm rounded-xl px-3 py-2 bg-olive-800 text-white hover:bg-olive-700">WhatsApp</a>
         </div>
       </article>
@@ -78,33 +75,11 @@ foreach($servicos as $s):
   </div>
 </section>
 
-<!-- PROJETOS EM DESTAQUE -->
-<section class="bg-olive-50">
-  <div class="max-w-7xl mx-auto px-4 md:px-6 py-14">
-    <div class="flex items-end justify-between">
-      <h2 class="text-2xl md:text-3xl font-semibold">Projetos em destaque</h2>
-      <a href="/portfolio" class="text-olive-800 hover:underline">Abrir portfólio</a>
-    </div>
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <?php for($i=1;$i<=3;$i++): ?>
-        <a href="/portfolio" class="group block rounded-2xl overflow-hidden border border-olive-100 hover:shadow-soft transition" data-aos="zoom-in">
-          <img src="/img/portfolio.jpg" alt="Projeto <?= $i ?>" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
-          <div class="p-4">
-            <h3 class="font-semibold">Projeto <?= $i ?></h3>
-            <p class="text-sm text-olive-700">Cozinha/Closet/Painel — Bairro Nobre</p>
-          </div>
-        </a>
-      <?php endfor; ?>
-    </div>
-  </div>
-</section>
-
-<!-- REGIÕES ATENDIDAS + CTA -->
 <section class="bg-white">
   <div class="max-w-7xl mx-auto px-4 md:px-6 py-14 grid md:grid-cols-2 gap-10 items-start">
     <div data-aos="fade-right">
       <h2 class="text-2xl md:text-3xl font-semibold">Regiões atendidas</h2>
-      <p class="mt-3 text-olive-700">Rio de Janeiro, Niteroi, Ilha do Governador.</p>
+      <p class="mt-3 text-olive-700">Rio de Janeiro, Niterói, Ilha do Governador.</p>
       <ul class="mt-4 grid grid-cols-2 gap-2 text-sm text-olive-800">
         <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Copacabana</li>
         <li><i data-lucide="map-pin" class="inline w-3 h-3 mr-1"></i> Botafogo</li>
@@ -127,5 +102,3 @@ foreach($servicos as $s):
     </div>
   </div>
 </section>
-
-
