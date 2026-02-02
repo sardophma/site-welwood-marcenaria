@@ -10,6 +10,14 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
 <!doctype html>
 <html lang="pt-BR">
 <head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2R3KNFSY5E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2R3KNFSY5E');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title><?= esc($title ?? 'WelWood') ?></title>
@@ -50,12 +58,12 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
   <link rel="stylesheet" href="/assets/welwood.css?v=1">
 
   <script src="https://unpkg.com/lucide@latest"></script>
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#7b8651">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#7b8651">
 
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -74,7 +82,7 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
             $links = [
               '/' => 'Home',
               '/servicos' => 'Serviços',
-              '/nossa-historia' => 'Nossa História',
+              '/sobre' => 'Como Funciona', // Atualizado para refletir a nova página
               '/portfolio' => 'Portfólio',
               '/agendamento' => 'Agendamento',
               '/contato' => 'Contato',
@@ -124,7 +132,7 @@ $wa        = preg_replace('/\D+/', '', $wa_raw);
           <img src="/img/logo.svg" alt="<?= esc($site_name) ?>" class="h-8 w-auto" />
           <span class="font-semibold"><?= esc($site_name) ?></span>
         </div>
-        <p class="mt-3 text-sm text-olive-700">Marcenaria & móveis sob medida — Rio de Janeiro, Niterói e São Gonçalo.</p>
+        <p class="mt-3 text-sm text-olive-700">Marcenaria 4.0 — Projetos sob medida no Rio de Janeiro e Niterói.</p>
       </div>
       <div>
         <h3 class="font-semibold mb-3">Atendimento</h3>
