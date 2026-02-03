@@ -1,11 +1,15 @@
 <?php
 return [
   'GET' => [
-    '/'               => ['view' => 'public/home', 'title' => 'WelWood — Marcenaria & Móveis Sob Medida', 'description' => 'Projetos sob medida no RJ, Niterói e São Gonçalo.'],
-    '/servicos'       => ['view' => 'public/services', 'title' => 'Serviços — WelWood', 'description' => 'Marcenaria, móveis sob medida, instalação e manutenção.'],
-    '/nossa-historia' => ['view' => 'public/about', 'title' => 'Nossa História — WelWood', 'description' => 'Paixão, família e qualidade.'],
-    '/portfolio'      => ['view' => 'public/portfolio', 'title' => 'Portfólio — WelWood', 'description' => 'Projetos em destaque.'],
-    '/agendamento'    => ['view' => 'public/schedule', 'title' => 'Agendamento — WelWood', 'description' => 'Solicite uma visita com CEP e horário pretendido.'],
-    '/contato'        => ['view' => 'public/contact', 'title' => 'Contato — WelWood', 'description' => 'Telefone, WhatsApp e e-mail.'],
+    '/'               => ['view' => 'public/home', 'title' => 'WelWood', 'description' => 'Móveis Planejados RJ'],
+    '/servicos'       => ['view' => 'public/services', 'title' => 'Serviços', 'description' => 'Nossos Serviços'],
+    
+    // LINHA NOVA AQUI:
+    '/sobre'          => ['view' => 'public/sobre', 'title' => 'Como Funciona — WelWood', 'description' => 'Entenda nosso processo.'],
+
+    '/nossa-historia' => ['view' => 'public/about', 'title' => 'Nossa História', 'description' => 'Sobre nós'],
+    '/portfolio'      => ['view' => 'public/portfolio', 'title' => 'Portfólio', 'description' => 'Projetos'],
+    '/agendamento'    => ['view' => 'public/schedule', 'title' => 'Agendamento', 'description' => 'Agende visita'],
+    '/contato'        => ['view' => 'public/contact', 'title' => 'Contato', 'description' => 'Fale conosco'],
   ],
 ];
