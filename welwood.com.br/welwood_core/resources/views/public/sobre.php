@@ -77,28 +77,24 @@ $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '5521968661598');
                 </li>
                 <li class="flex items-center gap-3 text-stone-700">
                     <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                    Materiais 100% MDF Arauco Certificado
+                    Materiais 100% MDF de Qualidade
                 </li>
             </ul>
         </div>
         
-        <div class="bg-stone-50 rounded-3xl p-8 md:p-10 border border-stone-200">
-            <div class="flex items-start justify-between mb-6">
-                <div>
-                    <p class="text-xs text-stone-500 uppercase tracking-widest font-bold mb-1">Dados da Empresa</p>
-                    <p class="text-lg md:text-2xl font-mono text-olive-900 font-bold">04.989.134/0001-38</p>
-                </div>
-                <div class="bg-green-100 text-green-700 px-3 py-1 rounded text-xs font-bold uppercase">Ativa</div>
+        <div class="bg-stone-50 rounded-3xl p-8 md:p-10 border border-stone-200 flex flex-col justify-center h-full">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-olive-700"></i>
+                <span class="text-xs font-bold uppercase tracking-widest text-olive-900">Empresa Verificada</span>
             </div>
             
-            <div class="space-y-3 text-sm border-t border-stone-200 pt-6">
-                <div class="flex justify-between">
-                    <span class="text-stone-500">Razão Social</span>
-                    <span class="text-olive-900 font-medium text-right">W.E.L WOOD MARCENARIA LTDA</span>
+            <div class="flex items-center gap-4 bg-white p-4 rounded-xl border border-stone-100 shadow-sm">
+                <div>
+                    <p class="text-[10px] text-stone-400 uppercase font-bold mb-0.5">CNPJ</p>
+                    <p class="text-sm font-mono text-stone-600">04.989.134/0001-38</p>
                 </div>
-                <div class="flex justify-between">
-                    <span class="text-stone-500">Localização</span>
-                    <span class="text-olive-900 font-medium text-right">São Gonçalo / RJ</span>
+                <div class="ml-auto">
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold uppercase">Ativa</span>
                 </div>
             </div>
         </div>
