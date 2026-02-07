@@ -97,32 +97,29 @@ if (!isset($_SESSION['logado'])) {
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos Base */
         body { -webkit-tap-highlight-color: transparent; }
-        .calc-input { font-size: 16px; } /* Evita zoom no iOS */
-        
-        /* Papel A4 */
-        .preview-page { width: 210mm; min-height: 297mm; background: white; padding: 15mm; position: relative; margin: 0 auto; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transform-origin: top center; }
-        .internal-page { width: 210mm; min-height: 297mm; background: #fffcf5; padding: 15mm; position: relative; margin: 0 auto; }
-        
-        /* Mobile Preview Scaling */
-        @media (max-width: 1023px) {
-            .preview-container { overflow-x: auto; padding-bottom: 20px; background: #e5e5e5; display: flex; justify-content: center; padding-top: 20px; }
-            .preview-page { transform: scale(0.48); margin-bottom: -140mm; } /* Reduz visualmente para caber no celular */
+        .calc-input { font-size: 16px; } 
+
+        .preview-page, .internal-page {
+            width: 210mm; 
+            min-height: 297mm; 
+            background: white; 
+            padding: 10mm 15mm; 
+            position: relative; 
+            margin: 0 auto; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
         }
+        .internal-page { background: #fffcf5; }
+        .no-break { page-break-inside: avoid; break-inside: avoid; }
         
-        /* Scrollbars */
+        @media (max-width: 1023px) {
+            .preview-container { overflow-x: auto; padding: 20px 0; background: #e5e5e5; display: flex; justify-content: center; }
+            .preview-page, .internal-page { transform: scale(0.48); transform-origin: top center; margin-bottom: -140mm; } 
+        }
+
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-thumb { background-color: #d7dcc2; border-radius: 4px; }
-        
-        /* Print */
-        @media print {
-            body * { visibility: hidden; }
-            #printArea, #printArea * { visibility: visible; }
-            #printArea { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
-            .preview-page { transform: none !important; margin-bottom: 0 !important; }
-        }
     </style>
 </head>
 <body class="bg-olive-50 text-olive-900 font-sans antialiased lg:h-screen lg:overflow-hidden flex flex-col">
@@ -149,7 +146,6 @@ if (!isset($_SESSION['logado'])) {
   <main class="flex-grow flex flex-col lg:flex-row overflow-visible lg:overflow-hidden no-print">
     
     <div class="w-full lg:w-5/12 bg-white border-b lg:border-b-0 lg:border-r border-olive-100 overflow-visible lg:overflow-y-auto custom-scroll pb-24 lg:pb-6 relative">
-        
         <div class="p-4 lg:p-6 space-y-6">
             <div class="space-y-3">
                 <h3 class="font-bold text-olive-800 text-xs uppercase tracking-wide flex items-center gap-2"><i data-lucide="user" class="w-4 h-4"></i> Cliente & Obra</h3>
@@ -205,7 +201,7 @@ if (!isset($_SESSION['logado'])) {
                  <h3 class="font-bold text-olive-800 text-xs uppercase tracking-wide flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4"></i> Memorial & Fotos</h3>
                  <textarea id="descriptionInput" rows="6" class="w-full p-3 border border-gray-200 rounded-xl text-base focus:border-olive-500 outline-none" placeholder="Descrição do projeto..." oninput="updateProposal()"></textarea>
                  <div class="bg-gray-50 p-4 rounded-xl border border-dashed border-gray-300 text-center">
-                     <label class="block text-xs font-bold text-gray-500 mb-2">Adicionar Imagens</label>
+                     <label class="block text-xs font-bold text-gray-500 mb-2">Adicionar Imagens (Render)</label>
                      <input type="file" id="imageInput" multiple accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-olive-600 file:text-white hover:file:bg-olive-700" onchange="handleImages()">
                  </div>
             </div>
@@ -220,10 +216,6 @@ if (!isset($_SESSION['logado'])) {
                 <div class="text-right">
                     <span id="finalSalePrice" class="text-2xl lg:text-3xl font-bold text-white tracking-tight">R$ 0,00</span>
                 </div>
-            </div>
-            <div class="flex justify-between text-[10px] mt-1 opacity-50 border-t border-gray-700 pt-1">
-                 <span>Bruto: <span id="calcGross">R$ 0,00</span></span>
-                 <span id="calcDisc" class="text-red-300 hidden"></span>
             </div>
         </div>
     </div>
@@ -251,7 +243,7 @@ if (!isset($_SESSION['logado'])) {
                     </div>
                 </div>
 
-                <div class="bg-olive-50/50 p-4 rounded-lg border border-olive-100 mb-6">
+                <div class="bg-olive-50/50 p-4 rounded-lg border border-olive-100 mb-6 no-break">
                     <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-700">
                         <p class="col-span-2"><span class="font-bold text-olive-800">Cliente:</span> <span id="propClient">---</span></p>
                         <p class="col-span-2"><span class="font-bold text-olive-800">Endereço:</span> <span id="propAddress">---</span></p>
@@ -265,9 +257,9 @@ if (!isset($_SESSION['logado'])) {
                     <div id="propDescription" class="text-sm text-gray-700 leading-relaxed whitespace-pre-line text-justify">Aguardando preenchimento...</div>
                 </div>
 
-                <div id="propImages" class="grid grid-cols-2 gap-4 mb-6"></div>
+                <div id="propImages" class="grid grid-cols-2 gap-4 mb-6 no-break"></div>
 
-                <div class="mt-auto break-inside-avoid">
+                <div class="mt-auto no-break">
                     <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
                         <h3 class="font-bold text-olive-900 border-b border-gray-300 mb-4 pb-1 uppercase text-xs tracking-wider">Investimento e Condições</h3>
                         
@@ -313,7 +305,7 @@ if (!isset($_SESSION['logado'])) {
                 </div>
                 
                 <div class="grid grid-cols-2 gap-8">
-                    <div>
+                    <div class="no-break">
                         <h3 class="font-bold text-sm uppercase mb-2 border-b">Fase 1: Produção</h3>
                         <table class="w-full text-sm mb-4">
                             <tr><td class="py-1">Material</td><td class="text-right font-mono" id="repMat">0,00</td></tr>
@@ -333,19 +325,19 @@ if (!isset($_SESSION['logado'])) {
                         </table>
                     </div>
 
-                    <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                    <div class="bg-gray-50 p-4 rounded border border-gray-200 no-break">
                         <h3 class="font-bold text-sm uppercase mb-2 text-blue-800">Resultado Financeiro</h3>
                         <table class="w-full text-sm">
                             <tr><td class="py-1">Custo Base</td><td class="text-right font-mono" id="repBase">0,00</td></tr>
-                            <tr><td class="py-1 text-gray-500">+ Encargos (12%)</td><td class="text-right font-mono text-gray-500" id="repTax">0,00</td></tr>
-                            <tr><td class="py-1 text-gray-500">+ Reserva (10%)</td><td class="text-right font-mono text-gray-500" id="repSpace">0,00</td></tr>
+                            <tr><td class="py-1 text-gray-500">+ Encargos e Impostos (12%)</td><td class="text-right font-mono text-gray-500" id="repTax">0,00</td></tr>
+                            <tr><td class="py-1 text-gray-500">+ Taxa Utilização Marcenaria (10%)</td><td class="text-right font-mono text-gray-500" id="repSpace">0,00</td></tr>
                             <tr class="font-bold"><td class="py-2">TABELA</td><td class="text-right font-mono" id="repGross">0,00</td></tr>
                             <tr><td class="py-1 text-red-500">(-) Desconto</td><td class="text-right font-mono text-red-500" id="repDisc">0,00</td></tr>
-                            <tr class="text-lg font-bold bg-green-100"><td class="py-2 pl-2">FINAL</td><td class="text-right font-mono pr-2" id="repFinal">0,00</td></tr>
+                            <tr class="text-lg font-bold bg-green-100"><td class="py-2 pl-2">VENDA FINAL</td><td class="text-right font-mono pr-2" id="repFinal">0,00</td></tr>
                         </table>
                         <div class="mt-6 pt-4 border-t border-gray-300 text-xs">
                             <div class="flex justify-between"><span>Pagar Custos</span><span id="destCost">0,00</span></div>
-                            <div class="flex justify-between font-bold"><span>Lucro Real</span><span id="destProfit">0,00</span></div>
+                            <div class="flex justify-between font-bold"><span>Saldo para Taxas e Uso</span><span id="destProfit">0,00</span></div>
                         </div>
                     </div>
                 </div>
@@ -360,52 +352,39 @@ if (!isset($_SESSION['logado'])) {
     const fmt = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     function calculate() {
-        // Inputs
         const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
         const mat=getVal('costMaterial'), lab=getVal('costLabor'), fre=getVal('costFreight'), ass=getVal('costAssembler'), fat=getVal('costFat');
         const mark=getVal('costMarketing'), cw=getVal('commWarlyn'), cp=getVal('commPedro');
         const discPct = getVal('discountPct');
 
-        // Fases
         const sub1 = mat+lab+fre+ass+fat;
         const sub2 = mark+cw+cp;
         const base = sub1 + sub2;
 
-        // Preço Cheio
         const tax = base * 0.12; 
         const space = base * 0.10;
         const grossPrice = base + tax + space;
 
-        // Desconto
         const discountValue = grossPrice * (discPct / 100);
         const finalPrice = grossPrice - discountValue;
 
         // UI Updates
         document.getElementById('subTotalPhase1').innerText = fmt(sub1);
         document.getElementById('totalBaseCost').innerText = fmt(base);
-        document.getElementById('calcGross').innerText = fmt(grossPrice);
-        
-        const discEl = document.getElementById('calcDisc');
-        if(discountValue > 0) {
-            discEl.classList.remove('hidden');
-            discEl.innerText = "- " + fmt(discountValue);
-        } else {
-            discEl.classList.add('hidden');
-        }
-
         document.getElementById('finalSalePrice').innerText = fmt(finalPrice);
         document.getElementById('sugEntry').innerText = fmt(finalPrice * 0.60);
 
-        // Preview Proposal
+        // PDF Updates
         document.getElementById('propTotalValue').innerText = fmt(finalPrice);
         document.getElementById('propEntry').innerText = fmt(finalPrice * 0.60);
         document.getElementById('propBalance').innerText = fmt(finalPrice * 0.40);
         
         const discRow = document.getElementById('discountRow');
+        const discEl = document.getElementById('propDiscDesc');
         if(discountValue > 0) {
             discRow.classList.remove('hidden');
             document.getElementById('propOriginalPrice').innerText = fmt(grossPrice);
-            document.getElementById('propDiscDesc').innerText = document.getElementById('discountDesc').value || "Desconto Especial";
+            discEl.innerText = document.getElementById('discountDesc').value || "Desconto Especial";
         } else {
             discRow.classList.add('hidden');
         }
@@ -450,10 +429,13 @@ if (!isset($_SESSION['logado'])) {
             Array.from(input.files).forEach(file => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = "h-56 w-full flex items-center justify-center bg-gray-50 border border-gray-200 rounded overflow-hidden no-break";
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.className = "w-full h-40 object-cover rounded border border-gray-200";
-                    container.appendChild(img);
+                    img.className = "max-w-full max-h-full w-auto h-auto object-contain block"; 
+                    wrapper.appendChild(img);
+                    container.appendChild(wrapper);
                 }
                 reader.readAsDataURL(file);
             });
@@ -461,22 +443,31 @@ if (!isset($_SESSION['logado'])) {
     }
 
     function genPDF(elId, name) {
-        const el = document.getElementById(elId);
-        const originalTransform = el.style.transform;
-        const originalMargin = el.style.marginBottom;
+        const originalElement = document.getElementById(elId);
+        const clone = originalElement.cloneNode(true);
+        clone.classList.remove('hidden');
+        clone.style.transform = 'none';
+        clone.style.margin = '0 auto';
+        clone.style.marginBottom = '0';
         
-        el.classList.remove('hidden');
-        // Reset scale for print
-        el.style.transform = 'none';
-        el.style.marginBottom = '0';
+        const container = document.createElement('div');
+        container.style.position = 'absolute';
+        container.style.top = '-9999px';
+        container.style.left = '0';
+        container.style.width = '210mm'; 
+        container.appendChild(clone);
+        document.body.appendChild(container);
+
+        const opt = {
+            margin: [0, 0, 0, 0],
+            filename: name,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, scrollY: 0, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
         
-        const opt = { margin:0, filename:name, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} };
-        
-        html2pdf().set(opt).from(el).save().then(() => { 
-            if(elId==='internalReport') el.classList.add('hidden'); 
-            // Restore scale for mobile view
-            el.style.transform = originalTransform;
-            el.style.marginBottom = originalMargin;
+        html2pdf().set(opt).from(clone).save().then(() => {
+            document.body.removeChild(container);
         });
     }
 
