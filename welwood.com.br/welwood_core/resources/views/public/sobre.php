@@ -83,18 +83,19 @@ $wa = preg_replace('/\D+/', '', $app['whatsapp'] ?? '5521968661598');
         </div>
         
         <div class="bg-stone-50 rounded-3xl p-8 md:p-10 border border-stone-200 flex flex-col justify-center h-full">
-            <div class="flex items-center gap-3 mb-2">
+            <div class="flex items-center gap-3 mb-4">
                 <i data-lucide="shield-check" class="w-5 h-5 text-olive-700"></i>
                 <span class="text-xs font-bold uppercase tracking-widest text-olive-900">Empresa Verificada</span>
             </div>
             
-            <div class="flex items-center gap-4 bg-white p-4 rounded-xl border border-stone-100 shadow-sm">
+            <div class="flex items-center gap-4 bg-white p-5 rounded-xl border border-stone-100 shadow-sm">
                 <div>
-                    <p class="text-[10px] text-stone-400 uppercase font-bold mb-0.5">CNPJ</p>
-                    <p class="text-sm font-mono text-stone-600">04.989.134/0001-38</p>
+                    <p class="text-[10px] text-stone-400 uppercase font-bold mb-1">Razão Social & CNPJ</p>
+                    <p class="text-sm font-bold text-olive-900 mb-0.5">WEL SOLUÇÕES LTDA</p>
+                    <p class="text-sm font-mono text-stone-600">65.747.237/0001-86</p>
                 </div>
                 <div class="ml-auto">
-                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold uppercase">Ativa</span>
+                    <span class="bg-green-100 text-green-700 px-3 py-1.5 rounded text-[10px] font-bold uppercase">Ativa</span>
                 </div>
             </div>
         </div>
