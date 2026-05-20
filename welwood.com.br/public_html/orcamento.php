@@ -242,7 +242,7 @@ if (!isset($_SESSION['logado'])) {
                 <div class="flex justify-between items-start border-b-2 border-olive-800 pb-6 mb-6">
                     <div>
                         <h1 class="text-2xl font-bold text-olive-900 tracking-tight">WelWood Marcenaria Planejada</h1>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Bunker Intermediação Ltda</p>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">WEL SOLUÇÕES LTDA</p>
                         <div class="text-xs text-gray-600 space-y-0.5">
                             <p><strong>CNPJ:</strong> 65.747.237/0001-86</p>
                             <p><strong>Tel:</strong> +55 (21) 96866-1598</p>
@@ -368,36 +368,29 @@ if (!isset($_SESSION['logado'])) {
     function calculate() {
         const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
         
-        // Valores Padrão
         const mat=getVal('costMaterial'), lab=getVal('costLabor'), fre=getVal('costFreight'), ass=getVal('costAssembler'), fat=getVal('costFat');
         const mark=getVal('costMarketing'), cw=getVal('commWarlyn'), cp=getVal('commPedro');
         
-        // Descontos e Taxas Editáveis
         const discPct = getVal('discountPct');
         const taxPct = getVal('taxPct');
         const spacePct = getVal('spacePct');
 
-        // Somatórias
         const sub1 = mat+lab+fre+ass+fat;
         const sub2 = mark+cw+cp;
         const base = sub1 + sub2;
 
-        // Calcula as taxas sobre a base, dividindo por 100
         const tax = base * (taxPct / 100); 
         const space = base * (spacePct / 100);
         const grossPrice = base + tax + space;
 
-        // Desconto
         const discountValue = grossPrice * (discPct / 100);
         const finalPrice = grossPrice - discountValue;
 
-        // UI Updates Principais
         document.getElementById('subTotalPhase1').innerText = fmt(sub1);
         document.getElementById('totalBaseCost').innerText = fmt(base);
         document.getElementById('finalSalePrice').innerText = fmt(finalPrice);
         document.getElementById('sugEntry').innerText = fmt(finalPrice * 0.60);
 
-        // PDF Preview Updates
         document.getElementById('propTotalValue').innerText = fmt(finalPrice);
         document.getElementById('propEntry').innerText = fmt(finalPrice * 0.60);
         document.getElementById('propBalance').innerText = fmt(finalPrice * 0.40);
@@ -412,11 +405,9 @@ if (!isset($_SESSION['logado'])) {
             discRow.classList.add('hidden');
         }
 
-        // Relatório Interno Updates
         const ids = { repMat:mat, repLab:lab, repFre:fre, repAss:ass, repFat:fat, repTotal1:sub1, repMark:mark, repComW:cw, repComP:cp, repTotal2:sub2, repBase:base, repTax:tax, repSpace:space, repGross:grossPrice, repDisc:discountValue, repFinal:finalPrice };
         for(let k in ids) document.getElementById(k).innerText = fmt(ids[k]);
         
-        // Atualiza os Labels do relatório com as novas porcentagens
         document.getElementById('repTaxLabel').innerText = `+ Encargos e Impostos (${taxPct}%)`;
         document.getElementById('repSpaceLabel').innerText = `+ Taxa Utilização Marcenaria (${spacePct}%)`;
 
