@@ -183,6 +183,20 @@ if (!isset($_SESSION['logado'])) {
                 <div class="flex justify-between text-xs pt-2 font-bold text-olive-800 px-1"><span>Custo Base:</span><span id="totalBaseCost">R$ 0,00</span></div>
             </div>
 
+            <div class="space-y-3 bg-red-50/50 p-4 rounded-xl border border-red-100">
+                <h3 class="font-bold text-red-800 text-xs uppercase tracking-wide flex items-center gap-2"><i data-lucide="calculator" class="w-4 h-4"></i> Impostos & Taxas (%)</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-red-600">Encargos e Impostos (%)</label>
+                        <input type="number" id="taxPct" class="w-full p-3 border border-red-200 rounded-xl text-base calc-input bg-white text-red-800 font-bold" value="12">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-red-600">Taxa Marcenaria (%)</label>
+                        <input type="number" id="spacePct" class="w-full p-3 border border-red-200 rounded-xl text-base calc-input bg-white text-red-800 font-bold" value="10">
+                    </div>
+                </div>
+            </div>
+
             <div class="space-y-3 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
                 <h3 class="font-bold text-blue-800 text-xs uppercase tracking-wide flex items-center gap-2"><i data-lucide="percent" class="w-4 h-4"></i> Desconto Especial</h3>
                 <div class="grid grid-cols-3 gap-3">
@@ -230,7 +244,7 @@ if (!isset($_SESSION['logado'])) {
                         <h1 class="text-2xl font-bold text-olive-900 tracking-tight">WelWood Marcenaria Planejada</h1>
                         <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Bunker Intermediação Ltda</p>
                         <div class="text-xs text-gray-600 space-y-0.5">
-                            <p><strong>CNPJ:</strong> 04.989.134/0001-38</p>
+                            <p><strong>CNPJ:</strong> 65.747.237/0001-86</p>
                             <p><strong>Tel:</strong> +55 (21) 96866-1598</p>
                             <p>@w.e.l_wood_marcenaria</p>
                         </div>
@@ -329,8 +343,8 @@ if (!isset($_SESSION['logado'])) {
                         <h3 class="font-bold text-sm uppercase mb-2 text-blue-800">Resultado Financeiro</h3>
                         <table class="w-full text-sm">
                             <tr><td class="py-1">Custo Base</td><td class="text-right font-mono" id="repBase">0,00</td></tr>
-                            <tr><td class="py-1 text-gray-500">+ Encargos e Impostos (12%)</td><td class="text-right font-mono text-gray-500" id="repTax">0,00</td></tr>
-                            <tr><td class="py-1 text-gray-500">+ Taxa Utilização Marcenaria (10%)</td><td class="text-right font-mono text-gray-500" id="repSpace">0,00</td></tr>
+                            <tr><td class="py-1 text-gray-500" id="repTaxLabel">+ Encargos e Impostos (%)</td><td class="text-right font-mono text-gray-500" id="repTax">0,00</td></tr>
+                            <tr><td class="py-1 text-gray-500" id="repSpaceLabel">+ Taxa Utilização Marcenaria (%)</td><td class="text-right font-mono text-gray-500" id="repSpace">0,00</td></tr>
                             <tr class="font-bold"><td class="py-2">TABELA</td><td class="text-right font-mono" id="repGross">0,00</td></tr>
                             <tr><td class="py-1 text-red-500">(-) Desconto</td><td class="text-right font-mono text-red-500" id="repDisc">0,00</td></tr>
                             <tr class="text-lg font-bold bg-green-100"><td class="py-2 pl-2">VENDA FINAL</td><td class="text-right font-mono pr-2" id="repFinal">0,00</td></tr>
@@ -353,28 +367,37 @@ if (!isset($_SESSION['logado'])) {
 
     function calculate() {
         const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
+        
+        // Valores Padrão
         const mat=getVal('costMaterial'), lab=getVal('costLabor'), fre=getVal('costFreight'), ass=getVal('costAssembler'), fat=getVal('costFat');
         const mark=getVal('costMarketing'), cw=getVal('commWarlyn'), cp=getVal('commPedro');
+        
+        // Descontos e Taxas Editáveis
         const discPct = getVal('discountPct');
+        const taxPct = getVal('taxPct');
+        const spacePct = getVal('spacePct');
 
+        // Somatórias
         const sub1 = mat+lab+fre+ass+fat;
         const sub2 = mark+cw+cp;
         const base = sub1 + sub2;
 
-        const tax = base * 0.12; 
-        const space = base * 0.10;
+        // Calcula as taxas sobre a base, dividindo por 100
+        const tax = base * (taxPct / 100); 
+        const space = base * (spacePct / 100);
         const grossPrice = base + tax + space;
 
+        // Desconto
         const discountValue = grossPrice * (discPct / 100);
         const finalPrice = grossPrice - discountValue;
 
-        // UI Updates
+        // UI Updates Principais
         document.getElementById('subTotalPhase1').innerText = fmt(sub1);
         document.getElementById('totalBaseCost').innerText = fmt(base);
         document.getElementById('finalSalePrice').innerText = fmt(finalPrice);
         document.getElementById('sugEntry').innerText = fmt(finalPrice * 0.60);
 
-        // PDF Updates
+        // PDF Preview Updates
         document.getElementById('propTotalValue').innerText = fmt(finalPrice);
         document.getElementById('propEntry').innerText = fmt(finalPrice * 0.60);
         document.getElementById('propBalance').innerText = fmt(finalPrice * 0.40);
@@ -389,9 +412,14 @@ if (!isset($_SESSION['logado'])) {
             discRow.classList.add('hidden');
         }
 
-        // Relatório
+        // Relatório Interno Updates
         const ids = { repMat:mat, repLab:lab, repFre:fre, repAss:ass, repFat:fat, repTotal1:sub1, repMark:mark, repComW:cw, repComP:cp, repTotal2:sub2, repBase:base, repTax:tax, repSpace:space, repGross:grossPrice, repDisc:discountValue, repFinal:finalPrice };
         for(let k in ids) document.getElementById(k).innerText = fmt(ids[k]);
+        
+        // Atualiza os Labels do relatório com as novas porcentagens
+        document.getElementById('repTaxLabel').innerText = `+ Encargos e Impostos (${taxPct}%)`;
+        document.getElementById('repSpaceLabel').innerText = `+ Taxa Utilização Marcenaria (${spacePct}%)`;
+
         document.getElementById('destCost').innerText = fmt(base);
         document.getElementById('destProfit').innerText = fmt(finalPrice - base);
 
